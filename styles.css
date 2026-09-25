@@ -27,4 +27,102 @@ main{overflow-x:clip}
 .referral-actions .button{width:100%;padding:15px 16px;font-size:10px;gap:12px}
 .referral-dex{display:flex;justify-content:center;margin-top:13px;font-size:11px}
 @media(max-width:1000px){.referral-card{grid-template-columns:1fr 285px;gap:24px;padding:26px}.referral-actions{padding-left:22px}.referral-copy h3{font-size:30px}}
-@media(max-width:760px){.referral-card{grid-template-columns:1fr;padding:24px 22px;gap:22px}.referral-actions{padding:22px 0 0;border-left:0;border-top:1px dashed #775030}.referral-copy h3{font-size:32px}}
+/* Phone layout separates the referral offer from the buying instructions. */
+.mobile-steps-heading { display: none; }
+@media (max-width: 760px) {
+  .buy-heading { margin-bottom: 28px; }
+  .referral-card {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 26px 22px;
+    margin-bottom: 48px;
+    background: linear-gradient(155deg, #2a2016, var(--panel) 70%);
+  }
+  .referral-copy { display: contents; }
+  .referral-copy .eyebrow {
+    order: 1;
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    margin: 0 0 15px;
+  }
+  .referral-copy h3 {
+    order: 2;
+    font-size: 36px;
+    line-height: 1.05;
+    margin: 0 0 17px;
+  }
+  .referral-copy h3 .orange { display: block; }
+  .referral-copy > p:not([class]) {
+    order: 3;
+    font-size: 14px;
+    line-height: 1.65;
+    margin: 0 0 24px;
+  }
+  .referral-actions {
+    order: 4;
+    padding: 0;
+    border: 0;
+  }
+  .referral-label { font-size: 9px; letter-spacing: 1.4px; margin-bottom: 10px; }
+  .referral-code-row {
+    background: #14120e;
+    border: 1px solid #66503a;
+    padding: 8px 8px 8px 14px;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  .referral-code-row code { font-family: var(--body); font-weight: 600; font-size: 20px; letter-spacing: -.5px; }
+  .referral-code-row button {
+    min-height: 44px;
+    padding: 10px 12px;
+    font-size: 11px;
+    background: #2a2016;
+  }
+  .referral-status { min-height: 0; margin: 0; font-size: 12px; }
+  .referral-status:not(:empty) { margin: 0 0 16px; }
+  .referral-actions .button { min-height: 52px; padding: 16px; font-size: 11px; }
+  .referral-dex { min-height: 44px; margin-top: 8px; font-size: 12px; }
+  .referral-copy .referral-details {
+    order: 5;
+    font-size: 12px;
+    line-height: 1.7;
+    margin: 17px 0 0;
+    padding-top: 19px;
+    border-top: 1px solid var(--line);
+  }
+  .referral-copy .referral-disclosure {
+    order: 6;
+    font-size: 11px;
+    line-height: 1.65;
+    margin: 12px 0 0;
+    color: #b1a494;
+  }
+  .mobile-steps-heading {
+    display: block;
+    color: var(--muted);
+    font: 600 10px/1.5 var(--body);
+    letter-spacing: 1.8px;
+    margin: 0 0 22px;
+  }
+  .buy-section .steps { border: 0; gap: 28px; }
+  .buy-section .steps article {
+    padding: 0 0 26px 43px;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .buy-section .steps article:last-child { padding-bottom: 0; border-bottom: 0; }
+  .buy-section .step-number { position: absolute; top: 0; left: 0; font-size: 22px; line-height: 1.2; }
+  .buy-section .step-symbol { display: none; }
+  .buy-section .steps h3 { margin: 0 0 12px; font-size: 25px; line-height: 1.15; }
+  .buy-section .steps p { font-size: 13px; line-height: 1.8; margin: 0 0 12px; }
+  .buy-section .steps p:last-child { margin-bottom: 0; }
+  .buy-section .steps .text-link { min-height: 44px; font-size: 12px; }
+}
+@media (max-width: 360px) {
+  .referral-card { padding: 24px 18px; }
+  .referral-code-row { padding-left: 10px; }
+  .referral-code-row code { font-size: 18px; }
+  .referral-code-row button { padding-inline: 9px; }
+}
