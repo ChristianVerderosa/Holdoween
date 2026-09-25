@@ -1,6 +1,4 @@
-﻿'use strict';
-// Add a creator referral URL here when one is supplied; Dexscreener is the default.
-const BUY_URL = 'https://dexscreener.com/solana/apy5fshcdsldyysh4hwgy8zsfj4at8fbkehzf3d72e9k';
+'use strict';
 const CONTRACT = 'BxftAowY2dVa2h9KMqDTPk4oMxzU9k6uVbZuoorXpump';
 function getHalloweenCountdown(now) {
   const year = now.getFullYear();
@@ -17,25 +15,29 @@ function updateCountdown() {
   document.getElementById('countdown-note').textContent = countdown.isHalloween ? 'Happy Holdoween. The big night is here!' : 'Midnight. October 31. Your local time.';
 }
 if (typeof document !== 'undefined') {
-  document.querySelectorAll('.button[data-dex]').forEach(link => { link.href = BUY_URL; });
   updateCountdown();
   setInterval(updateCountdown, 1000);
-  let copyTimeout;
-  document.getElementById('copy-contract').addEventListener('click', async () => {
-    const status = document.getElementById('copy-status');
-    clearTimeout(copyTimeout);
-    try {
-      await navigator.clipboard.writeText(CONTRACT);
-      status.textContent = 'Contract copied. Stay spooky.';
-    } catch {
-      const selection = window.getSelection();
-      const range = document.createRange();
-      range.selectNodeContents(document.getElementById('contract-address'));
-      selection.removeAllRanges();
-      selection.addRange(range);
-      status.textContent = 'Address selected. Press Ctrl+C (or ⌘C) to copy.';
-    }
-    copyTimeout = setTimeout(() => { status.textContent = ''; }, 5000);
-  });
+  function enableCopy(buttonId, textId, statusId, successMessage) {
+    let timeout;
+    document.getElementById(buttonId).addEventListener('click', async () => {
+      const source = document.getElementById(textId);
+      const status = document.getElementById(statusId);
+      clearTimeout(timeout);
+      try {
+        await navigator.clipboard.writeText(source.textContent.trim());
+        status.textContent = successMessage;
+      } catch {
+        const selection = window.getSelection();
+        const range = document.createRange();
+        range.selectNodeContents(source);
+        selection.removeAllRanges();
+        selection.addRange(range);
+        status.textContent = 'Text selected. Use your device copy command, or press Ctrl+C / Command+C.';
+      }
+      timeout = setTimeout(() => { status.textContent = ''; }, 8000);
+    });
+  }
+  enableCopy('copy-contract', 'contract-address', 'copy-status', 'Contract copied. Stay spooky.');
+  enableCopy('copy-referral', 'fomo-code', 'referral-status', 'Code copied. Enter it in Fomo if prompted.');
 }
 if (typeof module !== 'undefined') module.exports = { getHalloweenCountdown };
